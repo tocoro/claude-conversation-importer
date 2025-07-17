@@ -116,13 +116,23 @@ class TestNotionDatabaseManager:
         mock_client.databases.retrieve.return_value = {
             "properties": {
                 "タイトル": {"type": "title"},
+                "邦訳タイトル": {"type": "rich_text"},
                 "日付": {"type": "date"},
-                "トピック": {"type": "select"},
-                "ステータス": {"type": "select"},
+                "トピック": {"type": "select", "select": {"options": [
+                    {"name": "技術相談"}, {"name": "作業効率化"}, {"name": "学習・調査"}, 
+                    {"name": "創作・アイデア"}, {"name": "日常会話"}, {"name": "その他"}
+                ]}},
+                "ステータス": {"type": "select", "select": {"options": [
+                    {"name": "進行中"}, {"name": "完了"}, {"name": "要フォローアップ"}
+                ]}},
                 "要約": {"type": "rich_text"},
-                "参考になった度": {"type": "select"},
+                "参考になった度": {"type": "select", "select": {"options": [
+                    {"name": "⭐"}, {"name": "⭐⭐"}, {"name": "⭐⭐⭐"}, 
+                    {"name": "⭐⭐⭐⭐"}, {"name": "⭐⭐⭐⭐⭐"}
+                ]}},
                 "メッセージ数": {"type": "number"},
-                "会話ID": {"type": "rich_text"}
+                "会話ID": {"type": "rich_text"},
+                "Claude会話URL": {"type": "url"}
             }
         }
         

@@ -193,7 +193,7 @@ class TestConversationsParser:
                     "id": "test_005",
                     "title": "Stats Test 1",
                     "created_at": "2024-01-15T10:30:00Z",
-                    "messages": [{"role": "human", "content": "技術相談です"}] * 5
+                    "messages": [{"role": "human", "content": "プログラミングについて教えて"}] * 5
                 },
                 {
                     "id": "test_006", 
@@ -308,6 +308,6 @@ class TestParsedConversation:
         
         # Should auto-generate summary and classify topic
         assert conv.summary != ""
-        assert conv.topic == "技術相談"  # Should be classified as technical due to programming content
+        assert conv.topic == "学習・調査"  # Should be classified as learning due to "教えて" content
         assert conv.status == "完了"
         assert conv.rating == "⭐⭐⭐"

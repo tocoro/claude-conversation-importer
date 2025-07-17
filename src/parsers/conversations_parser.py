@@ -344,6 +344,18 @@ def detect_json_schema(file_path: str) -> Dict[str, Any]:
                 schema_info["estimated_conversations"] = len(data[key])
                 if data[key] and isinstance(data[key][0], dict):
                     schema_info["sample_keys"] = list(data[key][0].keys())
+                    
+                    # Analyze message structure in conversations
+                    sample_conv = data[key][0]
+                    for msg_key in ["messages", "turns", "exchanges", "history"]:
+                        if msg_key in sample_conv and sample_conv[msg_key]:
+                            messages = sample_conv[msg_key]
+                            if messages and isinstance(messages[0], dict):
+                                schema_info["message_structure"] = {
+                                    "message_key": msg_key,
+                                    "sample_message_keys": list(messages[0].keys())
+                                }
+                            break
                 break
     
     return schema_info
