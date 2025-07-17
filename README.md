@@ -101,23 +101,23 @@ python -m src.main test-connection
 python -m src.main stats data/conversations.json
 
 # 基本インポート
-python -m src.main import data/conversations.json
+python -m src.main import-conversations data/conversations.json
 
 # ドライラン（テスト実行）
-python -m src.main import data/conversations.json --dry-run
+python -m src.main import-conversations data/conversations.json --dry-run
 ```
 
 ### 高度なオプション
 
 ```bash
 # バッチサイズとモードを指定
-python -m src.main import data/conversations.json \
+python -m src.main import-conversations data/conversations.json \
   --batch-size 5 \
   --mode update \
   --topic-analysis
 
 # 日付範囲でフィルター
-python -m src.main import data/conversations.json \
+python -m src.main import-conversations data/conversations.json \
   --filter-date 2024-01-01 2024-12-31
 ```
 
@@ -181,10 +181,10 @@ python -m src.main list-databases
 python -m src.main stats <json_file>
 
 # 基本インポート
-python -m src.main import <json_file>
+python -m src.main import-conversations <json_file>
 
 # オプション付きインポート
-python -m src.main import <json_file> \
+python -m src.main import-conversations <json_file> \
   --batch-size <N> \
   --mode <update|create_only|overwrite> \
   --dry-run \
@@ -221,7 +221,7 @@ python -m src.main validate-database --fix
 tail -f logs/importer.log
 
 # 詳細ログで実行
-python -m src.main import <json_file> --verbose
+python -m src.main import-conversations <json_file> --verbose
 ```
 
 ## 🧪 テスト
@@ -249,7 +249,7 @@ pytest --cov=src tests/
 
 ```bash
 # 大量データの場合はバッチサイズを調整
-python -m src.main import large_conversations.json \
+python -m src.main import-conversations large_conversations.json \
   --batch-size 5 \
   --mode create_only
 ```
